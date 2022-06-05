@@ -6,16 +6,18 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import chromedriver_autoinstaller
 
 
 
 app=Flask(__name__)
 api=Api(app)
+chromedriver_autoinstaller.install() 
 
 def playlist(playlist_url):
     playlist=playlist_url
-    path="C:\Program Files (x86)\chromedriver.exe"
-    driver=webdriver.Chrome(executable_path=path)
+    
+    driver=webdriver.Chrome()
     youtube_all=[]
     driver.get(playlist)
 
@@ -26,7 +28,7 @@ def playlist(playlist_url):
     return youtube_all
 
 def mp3(youtube_all):
-        path="C:\Program Files (x86)\chromedriver.exe"
+        
         options1=webdriver.ChromeOptions()
 
         prefs={"download.default_directory": "C:\\Users\Jai\documents\mp3\songs","download.directory_upgrade": True,"download.prompt_for_download": False,
@@ -35,7 +37,7 @@ def mp3(youtube_all):
                             }
 
         options1.add_experimental_option("prefs",prefs)
-        driver=webdriver.Chrome(executable_path=path,chrome_options=options1)
+        driver=webdriver.Chrome(chrome_options=options1)
 
         driver.get("https://yt2mp3.tech/")
 
