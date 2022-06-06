@@ -8,6 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import chromedriver_autoinstaller
 from webdriver_manager.chrome import ChromeDriverManager
+import os
 
 
 
@@ -27,7 +28,7 @@ def playlist(playlist_url):
     ## might not be needed
     options1.add_argument("--remote-debugging-port=9222")
     options1.add_argument('--window-size=1920x1480')
-    driver=webdriver.Chrome(executable_path=ChromeDriverManager().install(),chrome_options=options1)
+    driver=webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options1)
     
     youtube_all=[]
     driver.get(playlist)
@@ -50,7 +51,7 @@ def mp3(youtube_all):
         ## might not be needed
         options1.add_argument("--remote-debugging-port=9222")
         options1.add_argument('--window-size=1920x1480')
-        driver=webdriver.Chrome(executable_path=ChromeDriverManager().install(),chrome_options=options1)
+        driver=webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options1)
 
         driver.get("https://yt2mp3.tech/")
 
