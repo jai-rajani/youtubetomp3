@@ -12,12 +12,22 @@ import chromedriver_autoinstaller
 
 app=Flask(__name__)
 api=Api(app)
-chromedriver_autoinstaller.install() 
+
 
 def playlist(playlist_url):
     playlist=playlist_url
+    options1=webdriver.ChromeOptions()
+
+        
+    options1.add_argument("--headless")
+    options1.add_argument("--disable-dev-shm-usage")        
+    options1.add_argument('--no-sandbox')
+    options1.add_argument("--disable-gpu")
+    ## might not be needed
+    options1.add_argument("--remote-debugging-port=9222")
+    options1.add_argument('--window-size=1920x1480')
+    driver=webdriver.Chrome(chrome_options=options1)
     
-    driver=webdriver.Chrome()
     youtube_all=[]
     driver.get(playlist)
 
@@ -31,12 +41,14 @@ def mp3(youtube_all):
         
         options1=webdriver.ChromeOptions()
 
-        prefs={"download.default_directory": "C:\\Users\Jai\documents\mp3\songs","download.directory_upgrade": True,"download.prompt_for_download": False,
-                        "directory_upgrade": True,
-                        "safebrowsing.enabled": True
-                            }
-
-        options1.add_experimental_option("prefs",prefs)
+        
+        options1.add_argument("--headless")
+        options1.add_argument("--disable-dev-shm-usage")
+        options1.add_argument('--no-sandbox')
+        options1.add_argument("--disable-gpu")
+        ## might not be needed
+        options1.add_argument("--remote-debugging-port=9222")
+        options1.add_argument('--window-size=1920x1480')
         driver=webdriver.Chrome(chrome_options=options1)
 
         driver.get("https://yt2mp3.tech/")
@@ -69,6 +81,7 @@ def mp3(youtube_all):
 class Converter(Resource):
   
     def get(self,playlist_url):
+        chromedriver_autoinstaller.install() 
         playlist_url=playlist_url.replace("jai","/")
         playlist_url=playlist_url.replace("rajani","?")
         print(playlist_url)
