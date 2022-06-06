@@ -89,7 +89,7 @@ class Converter(Resource):
         print(playlist_url)
         youtube_all=playlist(playlist_url)
         'mp3(youtube_all)'
-        return {"completion":"success"}
+        return {"completion":youtube_all}
        
 
 api.add_resource(Converter,"/convert/<string:playlist_url>")
