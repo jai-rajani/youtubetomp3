@@ -39,7 +39,7 @@ def playlist(playlist_url):
         youtube_all.append(srch.get_attribute(name="href"))
     return youtube_all
 
-def mp3(youtube_all):
+"""def mp3(youtube_all):
         
         options1=webdriver.ChromeOptions()
 
@@ -77,7 +77,7 @@ def mp3(youtube_all):
                 search.clear()
             except:
                 driver.quit()
-            time.sleep(10)
+            time.sleep(10)"""
 
 
 class Converter(Resource):
@@ -88,7 +88,7 @@ class Converter(Resource):
         playlist_url=playlist_url.replace("rajani","?")
         print(playlist_url)
         youtube_all=playlist(playlist_url)
-        mp3(youtube_all)
+        'mp3(youtube_all)'
         return {"completion":"success"}
        
 
